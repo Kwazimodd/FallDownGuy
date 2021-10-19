@@ -163,10 +163,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 264484077}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 765e9dd0046cbd84bbc6ca4486bc1f4a, type: 3}
+  m_Script: {fileID: 11500000, guid: 935df5e7b4c8f074c949b14e79131d19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerTransform: {fileID: 0}
+  _playerTransform: {fileID: 1008364904}
   _parts:
   - {fileID: 10417783080088128, guid: 805fd977577fc6544bd256594e7b3c03, type: 3}
   - {fileID: 10417783080088128, guid: 1f3ea1e8557374649ae4f408a5d50cc1, type: 3}
