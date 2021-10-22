@@ -27,11 +27,8 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
-        Move();
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Attack(GetCurrentDirection());
-        }
+       // Move();
+        TryToAttack();
     }
 
     private void Attack(Vector2 direction)
@@ -41,13 +38,13 @@ public class Player : MonoBehaviour
 
     private void Move()
     {
-        rigidbody2D.velocity = new Vector2(Input.GetAxisRaw("Horizontal"), 0).normalized * speed * Time.deltaTime;
+        rigidbody2D.velocity = new Vector2(Input.GetAxisRaw("Horizontal"), rigidbody2D.velocity.y).normalized * speed * Time.deltaTime;
         currentDirection = rigidbody2D.velocity.x > 0 ? Vector2.right : Vector2.left;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag.Equals("Platform"))
+        if (other.tag.Equals("Spikes"))
         {
             Death();
         }
@@ -55,18 +52,20 @@ public class Player : MonoBehaviour
 
     private void Death()
     {
-        //end game
+        Debug.Log("Death");
     }
 
-    private Vector2 GetCurrentDirection()
+    private void TryToAttack()
     {
-        if (Input.GetKeyDown(KeyCode.S))
+        if (Input.GetKeyDown(KeyCode.S) && Input.GetKeyDown(KeyCode.Space))
         {
-            return Vector2.down;
+             Attack(Vector2.down);
         }
-        else
+
+        else if (Input.GetKeyDown(KeyCode.Space))
         {
-            return currentDirection;
+            Attack(currentDirection);
         }
     }
 }
+

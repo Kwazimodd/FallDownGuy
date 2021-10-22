@@ -18,28 +18,25 @@ public class Attacker: MonoBehaviour
     {
         forceDirection = -direction;
         Debug.Log(direction);
-        GetComponent<Collider2D>().isTrigger = true;
-        GetComponent<Renderer>().enabled = true;
         Animate(directionIntDict[direction]);
     }
 
     public void StopAttack()
     {
-        GetComponent<Collider2D>().isTrigger = false;
-        GetComponent<Renderer>().enabled = false;
+        
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log(forceDirection);
-        if (other.tag.Contains("Spikes"))
-        {
-            GetComponentInParent<Rigidbody2D>().AddForce(forceDirection*100000);
-        }
+       
     }
 
     private void Animate(int direction)
     {
      //   GetComponent<Animator>().SetInteger("x", direction);
+    }
+
+    private void Start()
+    {
     }
 }
