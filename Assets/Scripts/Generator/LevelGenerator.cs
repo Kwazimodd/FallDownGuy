@@ -7,7 +7,9 @@ using UnityEngine;
 public class LevelGenerator : MonoBehaviour
 {
     [SerializeField] private Transform _playerTransform;
-    
+    [SerializeField] private Transform _gridTransform;
+
+
     [Header("Level Parts")]
     [SerializeField] private GameObject[] _parts;
 
@@ -24,8 +26,9 @@ public class LevelGenerator : MonoBehaviour
     {
         for (int i = 0; i < _countOfFirstParts; i++) 
         {
-            GameObject newPart = Instantiate(_parts[0], new Vector3(0, -1 * i * _offset, 90), Quaternion.identity);
+            GameObject newPart = Instantiate(_parts[0], new Vector3(0, -1 * i * _offset, 90), Quaternion.identity, _gridTransform);
             _tempParts.Add(newPart.GetComponent<LevelPart>());
+            _tempParts[i].LevelGenerator = this;
         }
     }
 
@@ -42,10 +45,14 @@ public class LevelGenerator : MonoBehaviour
         if (_currentIndex == 1) return;
 
         //instatiating next part of level
-        GameObject newPart = Instantiate(_parts[0], new Vector3(0, -1 * _currentIndex+1 * _offset, 90), Quaternion.identity);
+        GameObject newPart = Instantiate(_parts[0], new Vector3(0, -1 * _currentIndex + 1 * _offset, 90), Quaternion.identity);
+        
+        _tempParts.Add(newPart.GetComponent<LevelPart>());
+        _tempParts[_currentIndex+1].LevelGenerator = this;
+
 
         //removing previous part
-        GameObject.Destroy(_tempParts[_tempParts.Count-1]);
-        _tempParts.RemoveAt(_currentIndex-1);
+        GameObject.Destroy(_tempParts[0]);
+        _tempParts.RemoveAt(0);
     }
 }
