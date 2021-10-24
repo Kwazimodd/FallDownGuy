@@ -5,25 +5,7 @@ using UnityEngine;
 
 public class LevelPart : MonoBehaviour
 {
-
-    public event EventHandler OnPlayerMiddleEnter;
-
-    private LevelGenerator levelGenerator;
-
-    void Start()
-    {
-
-    }
-
-    void Update()
-    {
-
-    }
-
-    public LevelPart(LevelGenerator levelGenerator) 
-    {
-        this.levelGenerator = levelGenerator;
-    }
+    public LevelGenerator LevelGenerator { get; set; }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
