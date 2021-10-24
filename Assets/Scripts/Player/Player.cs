@@ -27,7 +27,7 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
-       // Move();
+        Move();
         TryToAttack();
     }
 
@@ -38,7 +38,7 @@ public class Player : MonoBehaviour
 
     private void Move()
     {
-        rigidbody2D.velocity = new Vector2(Input.GetAxisRaw("Horizontal"), rigidbody2D.velocity.y).normalized * speed * Time.deltaTime;
+        rigidbody2D.velocity = new Vector2(Input.GetAxisRaw("Horizontal"), rigidbody2D.velocity.y) * speed * Time.deltaTime;
         currentDirection = rigidbody2D.velocity.x > 0 ? Vector2.right : Vector2.left;
     }
 
