@@ -8,7 +8,22 @@ public class LevelPart : MonoBehaviour
 
     public event EventHandler OnPlayerMiddleEnter;
 
-    public LevelGenerator LevelGenerator { get; set; }
+    private LevelGenerator levelGenerator;
+
+    void Start()
+    {
+
+    }
+
+    void Update()
+    {
+
+    }
+
+    public LevelPart(LevelGenerator levelGenerator) 
+    {
+        this.levelGenerator = levelGenerator;
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
