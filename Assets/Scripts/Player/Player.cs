@@ -13,12 +13,14 @@ public class Player : MonoBehaviour
     private new Rigidbody2D rigidbody2D;
     [SerializeField] private float speed;
     [SerializeField] private float jumpHeight;
+    private Animator animator;
     private Attacker attacker;
 
     private List<String> collisionsList = new List<string>();
 
     private void Awake()
     {
+        animator = GetComponent<Animator>();
         rigidbody2D = GetComponent<Rigidbody2D>();
         attacker = GetComponentInChildren<Attacker>();
     }
@@ -61,7 +63,10 @@ public class Player : MonoBehaviour
 
     private void Move()
     {
-        rigidbody2D.velocity = new Vector2(Input.GetAxisRaw("Horizontal") * speed, rigidbody2D.velocity.y);
+        var horizontal = Input.GetAxisRaw("Horizontal");
+        rigidbody2D.velocity = new Vector2(horizontal * speed, rigidbody2D.velocity.y);
+        Debug.Log(horizontal);
+        animator.SetInteger("x", (int)horizontal);
     }
 
     private void Jump()
