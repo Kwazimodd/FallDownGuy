@@ -13,6 +13,8 @@ public class LevelPart : MonoBehaviour
         {
             LevelGenerator.Generate();
         }
+
+        GetComponent<Collider2D>().enabled = false;
     }
 }
 
