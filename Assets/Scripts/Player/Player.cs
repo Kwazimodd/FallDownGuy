@@ -11,12 +11,18 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     private new Rigidbody2D rigidbody2D;
     [SerializeField] private float speed;
+    [SerializeField] private float jumpHeight;
 
-    private Vector2 currentDirection = Vector2.right;
+    private List<String> collisionsList = new List<string>();
+
+    private void Awake()
+    {
+        rigidbody2D = GetComponent<Rigidbody2D>();        
+    }
 
     void Start()
     {
-        rigidbody2D = GetComponent<Rigidbody2D>();
+
     }
 
     // Update is called once per frame
@@ -28,44 +34,45 @@ public class Player : MonoBehaviour
     void FixedUpdate()
     {
         Move();
-        TryToAttack();
+        Attack();
+        if (Input.GetKey(KeyCode.Space) && collisionsList.Contains("Block"))
+        {
+            Jump();
+        }
     }
 
-    private void Attack(Vector2 direction)
+    private void Attack()
     {
-        GetComponentInChildren<Attacker>().Attack(direction);
+        GetComponentInChildren<Attacker>().Attack();
     }
 
     private void Move()
     {
-        rigidbody2D.velocity = new Vector2(Input.GetAxisRaw("Horizontal"), rigidbody2D.velocity.y) * speed * Time.deltaTime;
-        currentDirection = rigidbody2D.velocity.x > 0 ? Vector2.right : Vector2.left;
+        rigidbody2D.velocity = new Vector2(Input.GetAxisRaw("Horizontal") * speed, rigidbody2D.velocity.y);
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void Jump()
     {
-        if (other.tag.Equals("Spikes"))
+        rigidbody2D.velocity = new Vector2(0, jumpHeight);
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        collisionsList.Add(other.gameObject.tag);
+        if (collisionsList.Contains("Spikes"))
         {
             Death();
         }
+    }
+    
+    private void OnCollisionExit2D(Collision2D other)
+    {
+        collisionsList.Remove(other.gameObject.tag);
     }
 
     private void Death()
     {
         Debug.Log("Death");
-    }
-
-    private void TryToAttack()
-    {
-        if (Input.GetKeyDown(KeyCode.S) && Input.GetKeyDown(KeyCode.Space))
-        {
-             Attack(Vector2.down);
-        }
-
-        else if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Attack(currentDirection);
-        }
     }
 }
 
