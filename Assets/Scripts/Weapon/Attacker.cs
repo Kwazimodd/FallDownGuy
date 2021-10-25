@@ -8,40 +8,56 @@ public class Attacker: MonoBehaviour
 {
     private Vector2 forceDirection;
     [SerializeField] private float pushHeight;
+    private Animation animation;
+    private TrailRenderer trailRenderer;
+    private SpriteRenderer spriteRenderer;
+    private Collider2D collider2D;
     
     private List<String> collisionsList = new List<string>();
 
-    private static Dictionary<Vector2, int> directionIntDict => new Dictionary<Vector2, int>()
+    private static Dictionary<Vector2, String> directionAnimDict => new Dictionary<Vector2, String>()
     {
-        {Vector2.left, 0},
-        {Vector2.right, 1},
-        {Vector2.down, 2},
-        {Vector2.up, 3}
+        {Vector2.left, "AttackLeft"},
+        {Vector2.right, "AttackAnim"},
+        {Vector2.down, "AttackBottom"}
     };
-    public void Attack()
+
+    private void Awake()
     {
-        
-        if (Input.GetKeyDown(KeyCode.DownArrow))
-        {
-                
-        }   
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            
-        }   
-        if (Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            
-        }
+        animation = GetComponent<Animation>();
+        trailRenderer = GetComponentInChildren<TrailRenderer>();
+        collider2D = GetComponent<Collider2D>();
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+
+
+        spriteRenderer.enabled = false;
+        collider2D.enabled = false;
+        trailRenderer.enabled = false;
     }
 
-    public void StopAttack()
+    public void StartAttack()
+    {
+        spriteRenderer.enabled = true;
+        collider2D.enabled = true;
+        trailRenderer.enabled = true;
+    }
+
+    public void Attack(Vector2 direction)
     {
         
+        animation.Play(directionAnimDict[direction]);
+    }
+    
+    public void StopAttack()
+    {
+        spriteRenderer.enabled = false;
+        collider2D.enabled = false;
+        trailRenderer.enabled = false;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        Debug.Log("213123");
         collisionsList.Add(other.tag);
         if (other.tag.Equals("Spikes"))
         {

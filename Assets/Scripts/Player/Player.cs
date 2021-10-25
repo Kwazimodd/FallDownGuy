@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -12,12 +13,14 @@ public class Player : MonoBehaviour
     private new Rigidbody2D rigidbody2D;
     [SerializeField] private float speed;
     [SerializeField] private float jumpHeight;
+    private Attacker attacker;
 
     private List<String> collisionsList = new List<string>();
 
     private void Awake()
     {
-        rigidbody2D = GetComponent<Rigidbody2D>();        
+        rigidbody2D = GetComponent<Rigidbody2D>();
+        attacker = GetComponentInChildren<Attacker>();
     }
 
     void Start()
@@ -28,13 +31,12 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        Attack();
     }
 
     void FixedUpdate()
     {
         Move();
-        Attack();
         if (Input.GetKey(KeyCode.Space) && collisionsList.Contains("Block"))
         {
             Jump();
@@ -43,7 +45,18 @@ public class Player : MonoBehaviour
 
     private void Attack()
     {
-        GetComponentInChildren<Attacker>().Attack();
+        if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            attacker.Attack(Vector2.down);
+        }
+        else if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            attacker.Attack(Vector2.left);
+        }
+        else if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            attacker.Attack(Vector2.right);
+        }
     }
 
     private void Move()
