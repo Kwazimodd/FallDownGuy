@@ -36,8 +36,13 @@ public class LevelGenerator : MonoBehaviour
         _currentIndex++;
            
         //because there is no parts before first one and there is no need to spawn level after boss level
-        if (_currentIndex < 2 || _currentIndex > _countOfPartsWithCoins) 
+        if (_currentIndex < 2) 
             return;
+
+        if (_currentIndex > _countOfPartsWithCoins) 
+        {
+            SpawnBoss();
+        }
 
         int rangeOfParts = _random.Next(1, _parts.Length - 2);
 
@@ -58,5 +63,11 @@ public class LevelGenerator : MonoBehaviour
         _tempParts.Add(newPart.GetComponent<LevelPart>());
 
         _tempParts[index].LevelGenerator = this;
+    }
+
+    private void SpawnBoss()
+    {
+        Transform boss = _tempParts[_currentIndex].gameObject.transform.Find("Boss");
+        boss.gameObject.SetActive(true);
     }
 }
