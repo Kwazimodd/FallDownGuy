@@ -57,17 +57,17 @@ public class LevelGenerator : MonoBehaviour
         _tempParts[_currentIndex - 2].gameObject.SetActive(false);
     }
 
-    private void SpawnBoss()
-    {
-        Transform boss = _tempParts[_currentIndex].gameObject.transform.Find("Boss");
-        boss.gameObject.SetActive(true);
-    }
-
     private void CreateAndSetupPart(int index, int partToGenerate) 
     {
         GameObject newPart = Instantiate(_parts[partToGenerate], new Vector3(0, -1 * index * _offset, 90), Quaternion.identity, _gridTransform);
         _tempParts.Add(newPart.GetComponent<LevelPart>());
 
         _tempParts[index].LevelGenerator = this;
+    }
+
+    private void SpawnBoss()
+    {
+        Transform boss = _tempParts[_currentIndex].gameObject.transform.Find("Boss");
+        boss.gameObject.SetActive(true);
     }
 }
