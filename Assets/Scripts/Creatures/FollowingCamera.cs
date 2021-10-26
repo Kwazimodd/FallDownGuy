@@ -29,11 +29,6 @@ public class FollowingCamera : MonoBehaviour
 
     private void GoToAimObject()
     {
-        transform.position = new Vector3
-        (
-            transform.position.x,
-            Math.Min(aimObject.GetComponent<Transform>().position.y, transform.position.y),
-            transform.position.z
-        );
+        transform.position = new Vector3(transform.position.x,aimObject.GetComponent<Transform>().position.y,transform.position.z);
     }
 }

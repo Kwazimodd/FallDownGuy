@@ -69,5 +69,6 @@ public class LevelGenerator : MonoBehaviour
     {
         Transform boss = _tempParts[_currentIndex].gameObject.transform.Find("Boss");
         boss.gameObject.SetActive(true);
+        GameObject.FindGameObjectsWithTag("Weapon")[0].GetComponent<Transform>().localScale = new Vector3(2, 2, 1);
     }
 }

@@ -1,11 +1,7 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Data;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.UI;
-using UnityEngine.WSA;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -82,22 +78,14 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.tag.Contains("AngryBall"))
-        {
-            Death();
-        }
-    }
-
     private void OnCollisionExit2D(Collision2D other)
     {
         collisionsList.Remove(other.gameObject.tag);
     }
 
-    private void Death()
+    public void Death()
     {
-        Debug.Log("Death");
+        SceneManager.LoadScene("LoseScene", LoadSceneMode.Single);
     }
 }
 

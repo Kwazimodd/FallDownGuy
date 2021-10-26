@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.UIElements;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class AngryBall : MonoBehaviour
 {
     [SerializeField] private int health = 3;
@@ -54,6 +54,7 @@ public class AngryBall : MonoBehaviour
         ChangeState(new FollowState());
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        target = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     void Start()
@@ -78,6 +79,7 @@ public class AngryBall : MonoBehaviour
         if (health <= 0)
         {
             animator.SetBool("death", true);
+            SceneManager.LoadScene("WinScene", LoadSceneMode.Single);
         }
     }
 
@@ -107,6 +109,10 @@ public class AngryBall : MonoBehaviour
         {
             StartCoroutine(RedFlashlight());
             GetDamage(1);
+        }
+        if (other.tag.Contains("Player"))
+        {
+            target.GetComponent<Player>().Death();
         }
     }
 
