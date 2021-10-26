@@ -12,11 +12,12 @@ public class LevelGenerator : MonoBehaviour
     [SerializeField] private Transform _gridTransform;
 
     [Header("Level Parts")]
+    [SerializeField] private int _countOfPartsWithCoins = 10;
     [SerializeField] private float _offset = 24f;
     [SerializeField] private GameObject[] _parts;
 
-    private int _countOfFirstParts = 2;
-    private int _countOfPartsWithCoins = 20;
+    private int _countOfFirstParts = 3;
+    
     private int _currentIndex = -1; //because player starts before the first part
 
     private List<LevelPart> _tempParts = new List<LevelPart>();
@@ -34,8 +35,8 @@ public class LevelGenerator : MonoBehaviour
     {
         _currentIndex++;
            
-        //because there is no parts before first one
-        if (_currentIndex == 0) 
+        //because there is no parts before first one and there is no need to spawn level after boss level
+        if (_currentIndex < 2 || _currentIndex > _countOfPartsWithCoins) 
             return;
 
         int rangeOfParts = _random.Next(1, _parts.Length - 2);
@@ -47,8 +48,8 @@ public class LevelGenerator : MonoBehaviour
         //instatiating next part of level, despite last part with boss
         CreateAndSetupPart((_currentIndex + 1), rangeOfParts);
 
-        //removing previous part
-        _tempParts[_currentIndex - 1].gameObject.SetActive(false);
+        //removing part before previous
+        _tempParts[_currentIndex - 2].gameObject.SetActive(false);
     }
 
     private void CreateAndSetupPart(int index, int partToGenerate) 

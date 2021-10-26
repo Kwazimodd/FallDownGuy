@@ -12,6 +12,7 @@ public class LevelPart : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             LevelGenerator.Generate();
+            Debug.Log("Entered");
         }
 
         GetComponent<Collider2D>().enabled = false;
