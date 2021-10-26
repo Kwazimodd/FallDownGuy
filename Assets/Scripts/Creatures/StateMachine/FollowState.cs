@@ -16,10 +16,10 @@ class FollowState : IState
 
     public void Update()
     {   
-        parent.Animator.SetInteger("x", (int)parent.GetComponent<Rigidbody2D>().velocity.x);
+        parent.Animator.SetInteger("x", (int)parent.GetComponent<Rigidbody2D>().velocity.normalized.x);
         if(parent.Target!=null)
         {
-            parent.GetComponent<AngryBall>().MoveTo(new Vector2(parent.Target.transform.position.x - parent.transform.position.x, 0));
+            parent.MoveTo(new Vector2(parent.Target.transform.position.x - parent.transform.position.x, 0));
             float distance = Vector2.Distance(parent.transform.position, parent.Target.position);
             if(distance<=parent.AttackRange)
             {

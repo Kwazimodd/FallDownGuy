@@ -37,7 +37,7 @@ class AttackState : IState
         }
         else
         {
-            parent.ChangeState(new StaticState());
+            parent.ChangeState(new FollowState());
         }
     }
 

@@ -49,18 +49,20 @@ public class AngryBall : MonoBehaviour
 
     private void Awake()
     {
+        rigidbody2D = GetComponent<Rigidbody2D>();
+        ChangeState(new FollowState());
         animator = GetComponent<Animator>();
     }
 
     void Start()
     {
-        ChangeState(new StaticState());
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        currentState.Update();
     }
 
     public void GetDamage(int damage)
@@ -74,7 +76,6 @@ public class AngryBall : MonoBehaviour
         {
             currentState.Exit();
         }
-
         currentState = newState;
         currentState.Enter(this);
     }

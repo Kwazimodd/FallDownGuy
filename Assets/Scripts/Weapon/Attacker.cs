@@ -57,7 +57,6 @@ public class Attacker: MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("213123");
         collisionsList.Add(other.tag);
         if (other.tag.Equals("Spikes"))
         {
