@@ -1099,6 +1099,8 @@ GameObject:
   - component: {fileID: 2092877202}
   - component: {fileID: 2092877201}
   - component: {fileID: 2092877204}
+  - component: {fileID: 2092877205}
+  - component: {fileID: 2092877206}
   m_Layer: 0
   m_Name: AngryBall_0
   m_TagString: Untagged
@@ -1206,3 +1208,41 @@ CircleCollider2D:
   m_Offset: {x: 0.15, y: -0.53}
   serializedVersion: 2
   m_Radius: 0.44
+--- !u!114 &2092877205
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2092877200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 736a8340468d26f48a42df521bc6d22e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 3
+  speed: 10
+  target: {fileID: 1311954146}
+  attackRange: 5
+  canDoDamage: 0
+--- !u!50 &2092877206
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2092877200}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0

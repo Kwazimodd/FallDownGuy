@@ -45,8 +45,9 @@ class AttackState : IState
     {
         parent.CanDoDamage = true;
         parent.IsAttacking = true;
-        parent.Animator.SetInteger("x", 2);
-        yield return new WaitForSeconds(parent.Animator.GetCurrentAnimatorStateInfo(2).length);
+        parent.Animator.SetBool("attack", true);
+        yield return new WaitForSeconds(parent.Animator.GetCurrentAnimatorStateInfo(0).length);
+        parent.Animator.SetBool("attack", false);
         parent.IsAttacking = false;
     }
 }

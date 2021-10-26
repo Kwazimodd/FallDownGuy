@@ -62,6 +62,10 @@ public class AngryBall : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!IsAttacking)
+        {
+            AttackTime += Time.deltaTime;
+        }
         currentState.Update();
     }
 
