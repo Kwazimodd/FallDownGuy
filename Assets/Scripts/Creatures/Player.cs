@@ -72,7 +72,7 @@ public class Player : MonoBehaviour
     {
         rigidbody2D.velocity = new Vector2(0, jumpHeight);
     }
-
+    
     private void OnCollisionEnter2D(Collision2D other)
     {
         collisionsList.Add(other.gameObject.tag);
@@ -81,7 +81,15 @@ public class Player : MonoBehaviour
             Death();
         }
     }
-    
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.tag.Contains("AngryBall"))
+        {
+            Death();
+        }
+    }
+
     private void OnCollisionExit2D(Collision2D other)
     {
         collisionsList.Remove(other.gameObject.tag);

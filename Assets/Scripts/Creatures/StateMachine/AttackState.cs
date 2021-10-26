@@ -22,8 +22,13 @@ class AttackState : IState
 
     public void Update()
     {
+        if (!parent.IsAttacking)
+        {
+            parent.AttackTime += Time.deltaTime;
+        } 
         if (parent.AttackTime >= attackCooldown && !parent.IsAttacking)
         {
+            
             parent.AttackTime = 0;
             parent.StartCoroutine(Attack());
         }
