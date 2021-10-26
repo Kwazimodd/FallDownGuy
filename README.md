@@ -1,3 +1,7 @@
+<!-- Download -->
+Завантажити гру тут: https://github.com/Linad2997/FallDownGuy/releases/tag/1.0
+
+<!-- GUIDE -->
 Запуск - Build/FallDownGuy.exe
 
 Управління:
