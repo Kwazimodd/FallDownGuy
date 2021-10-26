@@ -1,7 +1,11 @@
-<!-- Download -->
+<!-- Download --> 
+<h3 align="center">Download</h3>
+
 Завантажити гру тут: https://github.com/Linad2997/FallDownGuy/releases/tag/1.0
+Після завантаження, необхідно розпакувати архів в окрему папку і запустити файл FallDownGuy.exe.
 
 <!-- GUIDE -->
+<h3 align="center">GUIDE</h3>
 Запуск - Build/FallDownGuy.exe
 
 Управління:
