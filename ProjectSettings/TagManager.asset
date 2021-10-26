@@ -8,6 +8,8 @@ TagManager:
   - Block
   - Coin
   - AngryBall
+  - AngryBall
+  - Weapon
   layers:
   - Default
   - TransparentFX

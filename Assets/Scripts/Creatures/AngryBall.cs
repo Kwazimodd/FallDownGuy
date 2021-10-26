@@ -11,6 +11,7 @@ public class AngryBall : MonoBehaviour
     private Rigidbody2D rigidbody2D;
     private float attackTime = 1f;
     private bool isAttacking;
+    private SpriteRenderer spriteRenderer;
     [SerializeField] private int speed;
     [SerializeField] private Transform target;
     [SerializeField] private float attackRange;
@@ -52,6 +53,7 @@ public class AngryBall : MonoBehaviour
         rigidbody2D = GetComponent<Rigidbody2D>();
         ChangeState(new FollowState());
         animator = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     void Start()
@@ -72,10 +74,16 @@ public class AngryBall : MonoBehaviour
     public void GetDamage(int damage)
     {
         health -= damage;
+        Debug.Log(health);
         if (health <= 0)
         {
-            
+            animator.SetBool("death", true);
         }
+    }
+
+    public void Destroy()
+    {
+        GameObject.Destroy(gameObject);
     }
 
     public void ChangeState(IState newState)
@@ -91,5 +99,21 @@ public class AngryBall : MonoBehaviour
     public void MoveTo(Vector2 direction)
     {
         rigidbody2D.velocity = direction * speed;
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.tag.Contains("Weapon"))
+        {
+            StartCoroutine(RedFlashlight());
+            GetDamage(1);
+        }
+    }
+
+    public IEnumerator RedFlashlight()
+    {
+        spriteRenderer.color = new Color(30, 0, 1);
+        yield return new WaitForSeconds(0.1f);
+        spriteRenderer.color = new Color(1, 1, 1);
     }
 }
