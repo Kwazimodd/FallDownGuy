@@ -9,7 +9,7 @@ public class AngryBall : MonoBehaviour
     [SerializeField] private int health = 3;
     private Animator animator;
     private Rigidbody2D rigidbody2D;
-    private float attackTime;
+    private float attackTime = 1f;
     private bool isAttacking;
     [SerializeField] private int speed;
     [SerializeField] private Transform target;
@@ -72,6 +72,10 @@ public class AngryBall : MonoBehaviour
     public void GetDamage(int damage)
     {
         health -= damage;
+        if (health <= 0)
+        {
+            
+        }
     }
 
     public void ChangeState(IState newState)
