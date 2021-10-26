@@ -65,7 +65,6 @@ public class Player : MonoBehaviour
     {
         var horizontal = Input.GetAxisRaw("Horizontal");
         rigidbody2D.velocity = new Vector2(horizontal * speed, rigidbody2D.velocity.y);
-        Debug.Log(horizontal);
         animator.SetInteger("x", (int)horizontal);
     }
 
